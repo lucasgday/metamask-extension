@@ -1,0 +1,91 @@
+diff --git a/node_modules/eth-json-rpc-middleware/dist/block-cache.js b/node_modules/eth-json-rpc-middleware/dist/block-cache.js
+index ebea7d1..208aa60 100644
+--- a/node_modules/eth-json-rpc-middleware/dist/block-cache.js
++++ b/node_modules/eth-json-rpc-middleware/dist/block-cache.js
+@@ -5,6 +5,11 @@ const json_rpc_engine_1 = require("json-rpc-engine");
+ const cache_1 = require("./utils/cache");
+ // `<nil>` comes from https://github.com/ethereum/go-ethereum/issues/16925
+ const emptyValues = [undefined, null, '\u003cnil\u003e'];
++const debug = (...args) => {
++    if (process.env.DEBUG_PROVIDER_TESTS === '1') {
++        console.log(...args)
++    }
++}
+ //
+ // Cache Strategies
+ //
+@@ -118,6 +123,7 @@ function createBlockCacheMiddleware({ blockTracker, } = {}) {
+         if (!blockTag) {
+             blockTag = 'latest';
+         }
++        debug('[eth-json-rpc-middleware > block-cache] blockTag =', blockTag, ', req =', req);
+         // get exact block number
+         let requestedBlockNumber;
+         if (blockTag === 'earliest') {
+@@ -125,9 +131,11 @@ function createBlockCacheMiddleware({ blockTracker, } = {}) {
+             requestedBlockNumber = '0x00';
+         }
+         else if (blockTag === 'latest') {
++            debug('[eth-json-rpc-middleware > block-cache] fetching latest block number to determine cache key');
+             // fetch latest block number
+             const latestBlockNumber = await blockTracker.getLatestBlock();
+             // clear all cache before latest block
++            debug('[eth-json-rpc-middleware > block-cache] clearing values stored under block numbers before', latestBlockNumber);
+             blockCache.clearBefore(latestBlockNumber);
+             requestedBlockNumber = latestBlockNumber;
+         }
+@@ -138,16 +146,19 @@ function createBlockCacheMiddleware({ blockTracker, } = {}) {
+         // end on a hit, continue on a miss
+         const cacheResult = await strategy.get(req, requestedBlockNumber);
+         if (cacheResult === undefined) {
++            debug('[eth-json-rpc-middleware > block-cache] no cache stored under', requestedBlockNumber, ', carrying request forward');
+             // cache miss
+             // wait for other middleware to handle request
+             // eslint-disable-next-line node/callback-return
+             await next();
++            debug('[eth-json-rpc-middleware > block-cache] populating cache with', res);
+             // add result to cache
+             // it's safe to cast res.result as Block, due to runtime type checks
+             // performed when strategy.set is called
+             await strategy.set(req, requestedBlockNumber, res.result);
+         }
+         else {
++            debug('[eth-json-rpc-middleware > block-cache] cache hit, reusing cache result stored under', requestedBlockNumber);
+             // fill in result from cache
+             res.result = cacheResult;
+         }
+diff --git a/node_modules/eth-json-rpc-middleware/dist/block-ref.js b/node_modules/eth-json-rpc-middleware/dist/block-ref.js
+index 48435b7..aa357e5 100644
+--- a/node_modules/eth-json-rpc-middleware/dist/block-ref.js
++++ b/node_modules/eth-json-rpc-middleware/dist/block-ref.js
+@@ -8,6 +8,11 @@ const json_rpc_engine_1 = require("json-rpc-engine");
+ const clone_1 = __importDefault(require("clone"));
+ const pify_1 = __importDefault(require("pify"));
+ const cache_1 = require("./utils/cache");
++const debug = (...args) => {
++  if (process.env.DEBUG_PROVIDER_TESTS === '1') {
++    console.log(...args)
++  }
++}
+ function createBlockRefMiddleware({ provider, blockTracker, } = {}) {
+     if (!provider) {
+         throw Error('BlockRefMiddleware - mandatory "provider" option is missing.');
+@@ -29,8 +34,10 @@ function createBlockRefMiddleware({ provider, blockTracker, } = {}) {
+             blockRef = 'latest';
+         }
+         if (blockRef !== 'latest') {
++            debug('[eth-json-rpc-middleware > block-ref] blockRef is not "latest", carrying request forward');
+             return next();
+         }
++        debug('[eth-json-rpc-middleware > block-ref] blockRef is "latest" or absent, fetching latest block');
+         // lookup latest block
+         const latestBlockNumber = await blockTracker.getLatestBlock();
+         // create child request with specific block-ref
+@@ -39,6 +46,7 @@ function createBlockRefMiddleware({ provider, blockTracker, } = {}) {
+             childRequest.params[blockRefIndex] = latestBlockNumber;
+         }
+         // perform child request
++        debug('[eth-json-rpc-middleware > block-ref] performing another request', childRequest);
+         const childRes = await (0, pify_1.default)(provider.sendAsync).call(provider, childRequest);
+         // copy child response onto original response
+         res.result = childRes.result;
