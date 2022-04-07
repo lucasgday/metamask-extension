@@ -1,0 +1,26 @@
+diff --git a/node_modules/eth-block-tracker/dist/PollingBlockTracker.js b/node_modules/eth-block-tracker/dist/PollingBlockTracker.js
+index b0c1ab8..b4d88b0 100644
+--- a/node_modules/eth-block-tracker/dist/PollingBlockTracker.js
++++ b/node_modules/eth-block-tracker/dist/PollingBlockTracker.js
+@@ -9,6 +9,11 @@ const pify_1 = __importDefault(require("pify"));
+ const BaseBlockTracker_1 = require("./BaseBlockTracker");
+ const createRandomId = (0, json_rpc_random_id_1.default)();
+ const sec = 1000;
++const debug = (...args) => {
++  if (process.env.DEBUG_PROVIDER_TESTS === '1') {
++    console.log(...args)
++  }
++}
+ class PollingBlockTracker extends BaseBlockTracker_1.BaseBlockTracker {
+     constructor(opts = {}) {
+         var _a;
+@@ -76,7 +81,9 @@ class PollingBlockTracker extends BaseBlockTracker_1.BaseBlockTracker {
+         if (this._setSkipCacheFlag) {
+             req.skipCache = true;
+         }
++        debug('[eth-block-tracker > PollingBlockTracker] making request', req);
+         const res = await (0, pify_1.default)((cb) => this._provider.sendAsync(req, cb))();
++        debug('[eth-block-tracker > PollingBlockTracker] got response', res);
+         if (res.error) {
+             throw new Error(`PollingBlockTracker - encountered error fetching block:\n${res.error.message}`);
+         }

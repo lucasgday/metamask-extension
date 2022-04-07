@@ -257,6 +257,7 @@ module.exports = {
         '**/__snapshots__/*.snap',
         'app/scripts/controllers/network/**/*.test.js',
         'app/scripts/controllers/permissions/**/*.test.js',
+        'app/scripts/controllers/network/provider-api-tests/*.js',
         'app/scripts/lib/**/*.test.js',
         'app/scripts/migrations/*.test.js',
         'app/scripts/platforms/*.test.js',

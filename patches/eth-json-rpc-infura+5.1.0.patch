@@ -1,0 +1,32 @@
+diff --git a/node_modules/eth-json-rpc-infura/src/index.js b/node_modules/eth-json-rpc-infura/src/index.js
+index 72fbdd4..6e515e7 100644
+--- a/node_modules/eth-json-rpc-infura/src/index.js
++++ b/node_modules/eth-json-rpc-infura/src/index.js
+@@ -1,6 +1,11 @@
+ const createAsyncMiddleware = require('json-rpc-engine/src/createAsyncMiddleware')
+ const { ethErrors } = require('eth-rpc-errors')
+ const fetch = require('node-fetch')
++const debug = (...args) => {
++  if (process.env.DEBUG_PROVIDER_TESTS === '1') {
++    console.log(...args)
++  }
++}
+ 
+ const RETRIABLE_ERRORS = [
+   // ignore server overload errors
+@@ -35,6 +40,7 @@ function createInfuraMiddleware (opts = {}) {
+     // retry MAX_ATTEMPTS times, if error matches filter
+     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+       try {
++        debug('[eth-json-rpc-infura] Attempting request to Infura. network =', network, 'projectId =', projectId, 'headers =', headers, 'req =', req)
+         // attempt request
+         await performFetch(network, projectId, headers, req, res, source)
+         // request was successful
+@@ -43,6 +49,7 @@ function createInfuraMiddleware (opts = {}) {
+         // an error was caught while performing the request
+         // if not retriable, resolve with the encountered error
+         if (!isRetriableError(err)) {
++          debug('[eth-json-rpc-infura] Non-retriable request error encountered. req = ', req, ', res = ', res, 'error = ', err)
+           // abort with error
+           throw err
+         }
