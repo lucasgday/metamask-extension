@@ -2,6 +2,11 @@ const { strict: assert } = require('assert');
 const { convertToHexValue, withFixtures } = require('../helpers');
 
 describe('Custom network', function () {
+  const chainID = 42161;
+  const networkURL = 'https://arbitrum-mainnet.infura.io';
+  const networkNAME = 'Arbitrum One';
+  const currencySYMBOL = 'AETH';
+  const blockExplorerURL = 'https://explorer.arbitrum.io';
   const ganacheOptions = {
     accounts: [
       {
@@ -11,7 +16,7 @@ describe('Custom network', function () {
       },
     ],
   };
-  it('adds custom network and switch to network', async function () {
+  it('add custom network and switch the network', async function () {
     await withFixtures(
       {
         fixtures: 'imported-account',
@@ -39,6 +44,7 @@ describe('Custom network', function () {
         });
         addButtons[0].click();
 
+        // verify network details
         const title = await driver.findElement({
           tag: 'span',
           text: 'Arbitrum One',
@@ -49,22 +55,28 @@ describe('Custom network', function () {
           'Title of popup should be selected network',
         );
 
-        const networkLabels = await driver.findElements('dd');
-        assert.equal(
-          networkLabels.length,
-          4,
-          'There should be 4 labels : Network Name, Network URL, Chain ID and Currency Symbol',
-        );
+        const [networkName, networkUrl, chainIdElement, currencySymbol] =
+          await driver.findElements('.definition-list dd');
 
         assert.equal(
-          await networkLabels[2].getText(),
-          '42161',
-          'Chain ID should be 42161',
+          await networkName.getText(),
+          networkNAME,
+          'Network name is not correct displayed',
         );
         assert.equal(
-          await networkLabels[3].getText(),
-          'AETH',
-          'Currency symbol should be AETH',
+          await networkUrl.getText(),
+          networkURL,
+          'Network Url is not correct displayed',
+        );
+        assert.equal(
+          await chainIdElement.getText(),
+          chainID.toString(),
+          'Chain Id is not correct displayed',
+        );
+        assert.equal(
+          await currencySymbol.getText(),
+          currencySYMBOL,
+          'Currency symbol is not correct displayed',
         );
 
         await driver.clickElement({ tag: 'a', text: 'View all details' });
@@ -72,7 +84,7 @@ describe('Custom network', function () {
         const networkDetailsLabels = await driver.findElements('dd');
         assert.equal(
           await networkDetailsLabels[8].getText(),
-          'https://explorer.arbitrum.io',
+          blockExplorerURL,
           'Block Explorer URL is not correct',
         );
 
@@ -84,15 +96,64 @@ describe('Custom network', function () {
           text: 'Switch to Arbitrum One',
         });
 
-        const networkName = await driver.findElement({
+        // verify network switched
+        const networkDisplayed = await driver.findElement({
           tag: 'span',
           text: 'Arbitrum One',
         });
         assert.equal(
-          await networkName.getText(),
+          await networkDisplayed.getText(),
           'Arbitrum One',
           'You have not switched to Arbitrum Network',
         );
+      },
+    );
+  });
+
+  it('add custom network and not switch the network', async function () {
+    await withFixtures(
+      {
+        fixtures: 'imported-account',
+        ganacheOptions,
+        title: this.test.title,
+      },
+      async ({ driver }) => {
+        await driver.navigate();
+        await driver.fill('#password', 'correct horse battery staple');
+        await driver.press('#password', driver.Key.ENTER);
+
+        await driver.clickElement('.account-menu__icon');
+        await driver.clickElement({ tag: 'div', text: 'Settings' });
+
+        await driver.clickElement({ tag: 'div', text: 'Experimental' });
+        const toggleList = await driver.findElements('.toggle-button');
+        toggleList[2].click();
+
+        await driver.clickElement('.network-display');
+        await driver.clickElement({ tag: 'button', text: 'Add Network' });
+
+        const addButtons = await driver.findElements({
+          tag: 'button',
+          text: 'Add',
+        });
+        addButtons[0].click();
+
+        await driver.clickElement({ tag: 'button', text: 'Approve' });
+
+        await driver.clickElement({
+          tag: 'h6',
+          text: 'Dismiss',
+        });
+
+        // verify if added network is in list of networks
+        const networkDisplay = await driver.findElement('.network-display');
+        await networkDisplay.click();
+
+        const avalancheNetwork = await driver.findElements({
+          text: `Arbitrum One`,
+          tag: 'span',
+        });
+        assert.ok(avalancheNetwork.length, 1);
       },
     );
   });
