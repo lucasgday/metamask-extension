@@ -132,6 +132,10 @@ describe('Custom network', function () {
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add Network' });
 
+        await driver.waitForSelector({
+          tag: 'button',
+          text: 'Add',
+        });
         const addButtons = await driver.findElements({
           tag: 'button',
           text: 'Add',
