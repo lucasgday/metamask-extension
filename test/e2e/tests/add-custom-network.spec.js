@@ -33,7 +33,7 @@ describe('Custom network', function () {
 
         await driver.clickElement({ tag: 'div', text: 'Experimental' });
         const toggleList = await driver.findElements('.toggle-button');
-        toggleList[2].click();
+        toggleList[1].click();
 
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add Network' });
@@ -131,7 +131,7 @@ describe('Custom network', function () {
 
         await driver.clickElement({ tag: 'div', text: 'Experimental' });
         const toggleList = await driver.findElements('.toggle-button');
-        toggleList[2].click();
+        toggleList[1].click();
 
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add Network' });
