@@ -36,6 +36,7 @@ describe('Custom network', function () {
         toggleList[1].click();
 
         await driver.clickElement('.network-display');
+        await driver.waitForSelector({ tag: 'button', text: 'Add Network' });
         await driver.clickElement({ tag: 'button', text: 'Add Network' });
 
         await driver.waitForSelector({
@@ -134,6 +135,7 @@ describe('Custom network', function () {
         toggleList[1].click();
 
         await driver.clickElement('.network-display');
+        await driver.waitForSelector({ tag: 'button', text: 'Add Network' });
         await driver.clickElement({ tag: 'button', text: 'Add Network' });
 
         await driver.waitForSelector({
