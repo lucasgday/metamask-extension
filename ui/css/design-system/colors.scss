@@ -5,6 +5,7 @@ $color-map: (
   'text-alternative': --color-text-alternative,
   'text-muted': --color-text-muted,
   'icon-default': --color-icon-default,
+  'icon-alternative': --color-icon-alternative,
   'icon-muted': --color-icon-muted,
   'border-default': --color-border-default,
   'border-muted': --color-border-muted,
@@ -46,6 +47,7 @@ $color-map: (
   'rinkeby': --rinkeby,
   'goerli': --goerli,
   'localhost': --localhost,
-  'transparent': transparent,
+  'transparent': --transparent,
   'flask-purple': --flask-purple,
+  'inherit': --inherit,
 );

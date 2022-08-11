@@ -72,6 +72,29 @@ export const BorderColors = [
   COLORS.LOCALHOST,
 ];
 
+export const TextColors = [
+  COLORS.TEXT_DEFAULT,
+  COLORS.TEXT_ALTERNATIVE,
+  COLORS.TEXT_MUTED,
+  COLORS.OVERLAY_INVERSE,
+  COLORS.PRIMARY_DEFAULT,
+  COLORS.PRIMARY_INVERSE,
+  COLORS.SECONDARY_DEFAULT,
+  COLORS.SECONDARY_INVERSE,
+  COLORS.ERROR_DEFAULT,
+  COLORS.ERROR_INVERSE,
+  COLORS.SUCCESS_DEFAULT,
+  COLORS.SUCCESS_INVERSE,
+  COLORS.WARNING_INVERSE,
+  COLORS.INFO_DEFAULT,
+  COLORS.INFO_INVERSE,
+  COLORS.ICON_DEFAULT,
+  COLORS.ICON_ALTERNATIVE,
+  COLORS.ICON_MUTED,
+  COLORS.INHERIT,
+];
+
+export const ValidTextColors = PropTypes.oneOf(TextColors);
 const ValidSize = PropTypes.oneOf(Sizes);
 const ValidSizeAndAuto = PropTypes.oneOf([...Sizes, 'auto']);
 export const ValidBackgroundColors = PropTypes.oneOf(BackgroundColors);
@@ -227,6 +250,7 @@ export default function Box({
   children,
   className,
   backgroundColor,
+  color = COLORS.TEXT_DEFAULT,
   as = 'div',
   ...props
 }) {
@@ -267,6 +291,7 @@ export default function Box({
     borderColor &&
       generateClassNames('border-color', borderColor, isValidString),
     borderWidth && generateClassNames('border-width', borderWidth, isValidSize),
+    color && generateClassNames('color', color, isValidString),
     {
       // Auto applied classes
       // ---Borders---
@@ -358,4 +383,9 @@ Box.propTypes = {
    * Defaults to 'div'
    */
   as: PropTypes.string,
+  /**
+   * The color of the Typography component Should use the COLOR object from
+   * ./ui/helpers/constants/design-system.js
+   */
+  color: ValidTextColors,
 };

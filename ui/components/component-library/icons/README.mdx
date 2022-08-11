@@ -1,0 +1,78 @@
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+
+import { IconAddSquareFilled } from '.';
+
+###
+
+# Icons
+
+A selection of reusable svg icon react components generated using the `BaseIcon` component and SVGR
+
+<Canvas>
+  <Story id="ui-components-component-library-icons-icons-stories-js--default-story" />
+</Canvas>
+
+## Props
+
+All icon components accept the props below as well as all [Box](/ui-components-ui-box-box-stories-js--default-story) component props
+
+<ArgsTable of={IconAddSquareFilled} />
+
+### Size
+
+Use the `size` prop to set the size of the icons
+
+Possible sizes include:
+
+- `xxs` 10px
+- `xs` 12px
+- `sm` 16px
+- `md` 20px
+- `lg` 24px
+- `xl` 32px
+
+Defaults to `sm`
+
+<Canvas>
+  <Story id="ui-components-component-library-icons-icons-stories-js--size" />
+</Canvas>
+
+```jsx
+import { SIZES } from '../../../helpers/constants/design-system';
+import { IconAddSquareFilled } from '../ui/component-library/icons';
+
+<IconAddSquareFilled size={SIZES.XXS} />
+<IconAddSquareFilled size={SIZES.XS} />
+<IconAddSquareFilled size={SIZES.SM} />
+<IconAddSquareFilled size={SIZES.MD} />
+<IconAddSquareFilled size={SIZES.LG} />
+<IconAddSquareFilled size={SIZES.XL} />
+```
+
+### Color
+
+The `color` prop sets the color of the icons. Defaults to `'inherit'` which will use the text color of the parent element. This is useful for inline icons.
+
+<Canvas>
+  <Story id="ui-components-component-library-icons-icons-stories-js--color" />
+</Canvas>
+
+```jsx
+import { COLORS } from '../../../helpers/constants/design-system';
+import { IconAddSquareFilled } from '../ui/component-library';
+
+<IconAddSquareFilled color={COLORS.ICON_DEFAULT} />
+<IconAddSquareFilled color={COLORS.ICON_ALTERNATIVE} />
+<IconAddSquareFilled color={COLORS.ICON_MUTED} />
+<IconAddSquareFilled color={COLORS.PRIMARY_DEFAULT} />
+<IconAddSquareFilled color={COLORS.ERROR_DEFAULT} />
+<IconAddSquareFilled color={COLORS.WARNING_DEFAULT} />
+```
+
+### Icons Search
+
+Use the icon search to find icons
+
+<Canvas>
+  <Story id="ui-components-component-library-icons-icons-stories-js--icon-search" />
+</Canvas>

@@ -8,6 +8,7 @@ $extraProperties: auto;
 $attributesToApplyExtraProperties: margin;
 
 .box {
+  --color-inherit: inherit;
   // Padding, Margin, and Gap
   @each $attribute in $attributes {
     @each $size in design-system.$sizes-numeric {
@@ -412,6 +413,23 @@ $attributesToApplyExtraProperties: margin;
       @media screen and (min-width: $min-width) {
         &--#{$breakpoint}\background-color-#{$variant} {
           background-color: var($color);
+        }
+      }
+    }
+  }
+
+  // color
+  @each $variant, $color in design-system.$color-map {
+    &--color-#{$variant} {
+      color: var($color);
+    }
+  }
+  // breakpoint classes
+  @each $breakpoint, $min-width in $screen-sizes-map {
+    @each $variant, $color in design-system.$color-map {
+      @media screen and (min-width: $min-width) {
+        &--#{$breakpoint}\background-color-#{$variant} {
+          color: var($color);
         }
       }
     }

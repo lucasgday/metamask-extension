@@ -90,11 +90,11 @@ DefaultStory.storyName = 'Default';
 
 export const Size = (args) => (
   <Box display={DISPLAY.FLEX} alignItems={ALIGN_ITEMS.BASELINE} gap={1}>
-    <BaseAvatar {...args} marginBottom={2} size={SIZES.XS} />
-    <BaseAvatar {...args} marginBottom={2} size={SIZES.SM} />
-    <BaseAvatar {...args} marginBottom={2} size={SIZES.MD} />
-    <BaseAvatar {...args} marginBottom={2} size={SIZES.LG} />
-    <BaseAvatar {...args} marginBottom={2} size={SIZES.XL} />
+    <BaseAvatar {...args} size={SIZES.XS} />
+    <BaseAvatar {...args} size={SIZES.SM} />
+    <BaseAvatar {...args} size={SIZES.MD} />
+    <BaseAvatar {...args} size={SIZES.LG} />
+    <BaseAvatar {...args} size={SIZES.XL} />
   </Box>
 );
 

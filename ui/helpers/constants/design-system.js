@@ -54,6 +54,7 @@ export const COLORS = {
   GOERLI: 'goerli',
   TRANSPARENT: 'transparent',
   LOCALHOST: 'localhost',
+  INHERIT: 'inherit',
 };
 
 export const TYPOGRAPHY = {
@@ -72,6 +73,7 @@ export const TYPOGRAPHY = {
 const NONE = 'none';
 
 export const SIZES = {
+  XXS: 'xxs',
   XS: 'xs',
   SM: 'sm',
   MD: 'md',
