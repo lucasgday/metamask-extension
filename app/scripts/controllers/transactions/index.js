@@ -670,27 +670,34 @@ export default class TransactionController extends EventEmitter {
    * state is unapproved. Returns the updated transaction.
    *
    * @param {string} txId - transaction id
+   * @param {number} currentSendFlowHistoryLength - sendFlowHistory entries currently
    * @param {Array<{ entry: string, timestamp: number }>} sendFlowHistory -
    *  history to add to the sendFlowHistory property of txMeta.
    * @returns {TransactionMeta} the txMeta of the updated transaction
    */
-  updateTransactionSendFlowHistory(txId, sendFlowHistory) {
+  updateTransactionSendFlowHistory(
+    txId,
+    currentSendFlowHistoryLength,
+    sendFlowHistory,
+  ) {
     this._throwErrorIfNotUnapprovedTx(txId, 'updateTransactionSendFlowHistory');
     const txMeta = this._getTransaction(txId);
 
-    // only update what is defined
-    const note = `Update sendFlowHistory for ${txId}`;
+    if (currentSendFlowHistoryLength === txMeta?.sendFlowHistory.length) {
+      // only update what is defined
+      const note = `Update sendFlowHistory for ${txId}`;
 
-    this.txStateManager.updateTransaction(
-      {
-        ...txMeta,
-        sendFlowHistory: [
-          ...(txMeta?.sendFlowHistory ?? []),
-          ...sendFlowHistory,
-        ],
-      },
-      note,
-    );
+      this.txStateManager.updateTransaction(
+        {
+          ...txMeta,
+          sendFlowHistory: [
+            ...(txMeta?.sendFlowHistory ?? []),
+            ...sendFlowHistory,
+          ],
+        },
+        note,
+      );
+    }
     return this._getTransaction(txId);
   }
 
@@ -755,6 +762,7 @@ export default class TransactionController extends EventEmitter {
       // Assert that the origin has permissions to initiate transactions from
       // the specified address
       const permittedAddresses = await this.getPermittedAccounts(origin);
+      console.log('permittedAddresses', permittedAddresses);
       if (!permittedAddresses.includes(normalizedTxParams.from)) {
         throw ethErrors.provider.unauthorized({ data: { origin } });
       }

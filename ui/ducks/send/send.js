@@ -2263,6 +2263,7 @@ export function signTransaction() {
         ),
       };
 
+      console.log('------------unapprovedTx = ', unapprovedTx);
       await dispatch(
         addHistoryEntry(
           `sendFlow - user clicked next and transaction should be updated in controller`,
@@ -2271,6 +2272,7 @@ export function signTransaction() {
       await dispatch(
         updateTransactionSendFlowHistory(
           draftTransaction.id,
+          unapprovedTx.txMeta.sendFlowHistory.length,
           draftTransaction.history,
         ),
       );
