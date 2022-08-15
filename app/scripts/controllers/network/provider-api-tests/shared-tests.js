@@ -516,6 +516,51 @@ export function testsForRpcMethodThatSupportsMultipleParams(
         });
       },
     );
+
+    it.only('queues requests while a previous identical call is still pending, then runs the queue when it finishes, reusing the result from the first request', async () => {
+      const requests = [{ method }, { method }, { method }];
+      const mockResults = ['first result', 'second result', 'third result'];
+
+      await mockingInfuraCommunications(async (comms) => {
+        // The first time a block-cacheable request is made, the latest block
+        // number is retrieved through the block tracker first. It doesn't
+        // matter what this is — it's just used as a cache key.
+        comms.mockNextBlockTrackerRequest();
+        comms.mockSuccessfulInfuraRpcCall({
+          request: requests[0],
+          response: { result: mockResults[0] },
+          delay: 1000,
+        });
+        comms.mockSuccessfulInfuraRpcCall({
+          request: requests[1],
+          response: { result: mockResults[1] },
+        });
+        comms.mockSuccessfulInfuraRpcCall({
+          request: requests[2],
+          response: { result: mockResults[2] },
+        });
+
+        const results = await withInfuraClient(async (client) => {
+          const resultPromises = [
+            client.makeRpcCall(requests[0]),
+            client.makeRpcCall(requests[1]),
+            client.makeRpcCall(requests[2]),
+          ];
+          const firstResult = await resultPromises[0];
+          // The inflight cache middleware uses setTimeout to run the handlers,
+          // so run them now
+          client.clock.runAll();
+          const remainingResults = await Promise.all(resultPromises.slice(1));
+          return [firstResult, ...remainingResults];
+        });
+
+        expect(results).toStrictEqual([
+          mockResults[0],
+          mockResults[0],
+          mockResults[0],
+        ]);
+      });
+    });
   });
 
   describe.each([

@@ -89,3 +89,47 @@ index 48435b7..aa357e5 100644
          const childRes = await (0, pify_1.default)(provider.sendAsync).call(provider, childRequest);
          // copy child response onto original response
          res.result = childRes.result;
+diff --git a/node_modules/eth-json-rpc-middleware/dist/inflight-cache.js b/node_modules/eth-json-rpc-middleware/dist/inflight-cache.js
+index a7b745a..57bb152 100644
+--- a/node_modules/eth-json-rpc-middleware/dist/inflight-cache.js
++++ b/node_modules/eth-json-rpc-middleware/dist/inflight-cache.js
+@@ -7,6 +7,11 @@ exports.createInflightCacheMiddleware = void 0;
+ const clone_1 = __importDefault(require("clone"));
+ const json_rpc_engine_1 = require("json-rpc-engine");
+ const cache_1 = require("./utils/cache");
++const debug = (...args) => {
++    if (process.env.DEBUG_PROVIDER_TESTS === '1') {
++        console.log(...args)
++    }
++}
+ function createInflightCacheMiddleware() {
+     const inflightRequests = {};
+     return (0, json_rpc_engine_1.createAsyncMiddleware)(async (req, res, next) => {
+@@ -18,12 +23,14 @@ function createInflightCacheMiddleware() {
+         const cacheId = (0, cache_1.cacheIdentifierForPayload)(req);
+         // if not cacheable, skip
+         if (!cacheId) {
++            debug('[eth-json-rpc-middleware > inflight-cache] request is not cacheable, proceeding', req)
+             return next();
+         }
+         // check for matching requests
+         let activeRequestHandlers = inflightRequests[cacheId];
+         // if found, wait for the active request to be handled
+         if (activeRequestHandlers) {
++            debug('[eth-json-rpc-middleware > inflight-cache] found handlers for request', req, ', running them now', 'activeRequestHandlers.length', activeRequestHandlers.length)
+             // setup the response listener and wait for it to be called
+             // it will handle copying the result and request fields
+             await createActiveRequestHandler(res, activeRequestHandlers);
+@@ -34,10 +41,12 @@ function createInflightCacheMiddleware() {
+         inflightRequests[cacheId] = activeRequestHandlers;
+         // allow request to be handled normally
+         // eslint-disable-next-line node/callback-return
++        debug('[eth-json-rpc-middleware > inflight-cache] letting original request call through', req)
+         await next();
+         // clear inflight requests
+         delete inflightRequests[cacheId];
+         // schedule activeRequestHandlers to be handled
++        debug('[eth-json-rpc-middleware > inflight-cache] running collected handlers for request', req, 'activeRequestHandlers.length', activeRequestHandlers.length)
+         handleActiveRequest(res, activeRequestHandlers);
+         // complete
+         return undefined;
