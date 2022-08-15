@@ -336,7 +336,7 @@ export function testsForRpcMethodThatSupportsMultipleParams(
           ),
           response: { result: mockResults[0] },
         });
-        // Oddly, the block-ref middleware will still allow the original
+        // Note that the block-ref middleware will still allow the original
         // request to go through.
         comms.mockSuccessfulInfuraRpcCall({
           request: requests[0],
@@ -376,7 +376,7 @@ export function testsForRpcMethodThatSupportsMultipleParams(
           ),
           response: { result: mockResults[0] },
         });
-        // Oddly, the block-ref middleware will still allow the original
+        // Note that the block-ref middleware will still allow the original
         // request to go through.
         comms.mockSuccessfulInfuraRpcCall({
           request: requests[0],
@@ -443,7 +443,7 @@ export function testsForRpcMethodThatSupportsMultipleParams(
             ),
             response: { result: mockResults[0] },
           });
-          // Oddly, the block-ref middleware will still allow the original
+          // Note that the block-ref middleware will still allow the original
           // request to go through.
           comms.mockSuccessfulInfuraRpcCall({
             request: requests[0],
