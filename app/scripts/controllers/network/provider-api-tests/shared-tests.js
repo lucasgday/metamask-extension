@@ -388,7 +388,7 @@ export function testsForRpcMethodThatSupportsMultipleParams(
           response: { result: mockResults[1] },
         });
         // The previous two requests will happen again, with a different block
-        // number,in the same order.
+        // number, in the same order.
         comms.mockSuccessfulInfuraRpcCall({
           request: buildRequestWithReplacedBlockParam(
             requests[0],
