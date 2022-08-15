@@ -31,12 +31,12 @@ describe('Custom network', function () {
         await driver.clickElement('.account-menu__icon');
         await driver.clickElement({ tag: 'div', text: 'Settings' });
 
-        //enables custom network list 
+        // enables custom network list
         await driver.clickElement({ tag: 'div', text: 'Experimental' });
         const toggleList = await driver.findElements('.toggle-button');
         toggleList[1].click();
 
-         //added delay since it needs more time to load that custom network switch is on
+        // added delay since it needs more time to load that custom network switch is on
         await driver.delay(500);
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add network' });
@@ -132,12 +132,12 @@ describe('Custom network', function () {
         await driver.clickElement('.account-menu__icon');
         await driver.clickElement({ tag: 'div', text: 'Settings' });
 
-        //enables custom network list
+        // enables custom network list
         await driver.clickElement({ tag: 'div', text: 'Experimental' });
         const toggleList = await driver.findElements('.toggle-button');
         toggleList[1].click();
 
-        //added delay since it needs more time to load that custom network switch is on
+        // added delay since it needs more time to load that custom network switch is on
         await driver.delay(500);
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add network' });
