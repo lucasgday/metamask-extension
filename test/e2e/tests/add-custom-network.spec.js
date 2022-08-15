@@ -35,6 +35,7 @@ describe('Custom network', function () {
         const toggleList = await driver.findElements('.toggle-button');
         toggleList[1].click();
 
+        await driver.delay(500);
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add network' });
 
@@ -133,6 +134,7 @@ describe('Custom network', function () {
         const toggleList = await driver.findElements('.toggle-button');
         toggleList[1].click();
 
+        await driver.delay(500);
         await driver.clickElement('.network-display');
         await driver.clickElement({ tag: 'button', text: 'Add network' });
 
