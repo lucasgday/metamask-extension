@@ -2263,7 +2263,6 @@ export function signTransaction() {
         ),
       };
 
-      console.log('------------unapprovedTx = ', unapprovedTx);
       await dispatch(
         addHistoryEntry(
           `sendFlow - user clicked next and transaction should be updated in controller`,
