@@ -152,7 +152,7 @@ describe('MetaMaskController', function () {
         },
         ORIGIN_METAMASK,
       );
-      console.log('accounts', txMeta.id);
+
       const [transaction1, transaction2] = await Promise.all([
         metamaskController
           .getApi()
