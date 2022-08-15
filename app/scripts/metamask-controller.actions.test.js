@@ -139,7 +139,7 @@ describe('MetaMaskController', function () {
     });
   });
 
-  describe.only('#updateTransactionSendFlowHistory', function () {
+  describe('#updateTransactionSendFlowHistory', function () {
     it('two sequential calls with same history give same result', async function () {
       const recipientAddress = '0xc42edfcc21ed14dda456aa0756c153f7985d8813';
 
