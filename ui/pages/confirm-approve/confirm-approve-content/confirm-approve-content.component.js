@@ -33,10 +33,7 @@ import {
   ERC20,
   ERC721,
 } from '../../../../shared/constants/transaction';
-import {
-  MAINNET_CHAIN_ID,
-  TEST_CHAINS,
-} from '../../../../shared/constants/network';
+import { CHAIN_IDS, TEST_CHAINS } from '../../../../shared/constants/network';
 
 export default class ConfirmApproveContent extends Component {
   static contextTypes = {
@@ -468,7 +465,7 @@ export default class ConfirmApproveContent extends Component {
     const { t } = this.context;
     const useBlockExplorer =
       rpcPrefs?.blockExplorerUrl ||
-      [...TEST_CHAINS, MAINNET_CHAIN_ID].includes(chainId);
+      [...TEST_CHAINS, CHAIN_IDS.MAINNET].includes(chainId);
 
     let titleTokenDescription = t('token');
     const tokenIdWrapped = tokenId ? ` (#${tokenId})` : '';

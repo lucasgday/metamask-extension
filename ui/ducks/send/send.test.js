@@ -10,10 +10,7 @@ import {
   KNOWN_RECIPIENT_ADDRESS_WARNING,
   NEGATIVE_ETH_ERROR,
 } from '../../pages/send/send.constants';
-import {
-  MAINNET_CHAIN_ID,
-  RINKEBY_CHAIN_ID,
-} from '../../../shared/constants/network';
+import { CHAIN_IDS } from '../../../shared/constants/network';
 import { GAS_ESTIMATE_TYPES, GAS_LIMITS } from '../../../shared/constants/gas';
 import {
   ASSET_TYPES,
@@ -1576,10 +1573,10 @@ describe('Send Slice', () => {
           blockGasLimit: '',
           selectedAddress: '',
           provider: {
-            chainId: RINKEBY_CHAIN_ID,
+            chainId: CHAIN_IDS.RINKEBY,
           },
           cachedBalances: {
-            [RINKEBY_CHAIN_ID]: {
+            [CHAIN_IDS.RINKEBY]: {
               '0xAddress': '0x0',
             },
           },
@@ -2168,7 +2165,7 @@ describe('Send Slice', () => {
           },
           metamask: {
             provider: {
-              chainId: RINKEBY_CHAIN_ID,
+              chainId: CHAIN_IDS.RINKEBY,
             },
           },
         };
@@ -2217,7 +2214,7 @@ describe('Send Slice', () => {
           },
           metamask: {
             provider: {
-              chainId: RINKEBY_CHAIN_ID,
+              chainId: CHAIN_IDS.RINKEBY,
             },
           },
         };
@@ -2375,11 +2372,11 @@ describe('Send Slice', () => {
             gasEstimateType: GAS_ESTIMATE_TYPES.NONE,
             gasFeeEstimates: {},
             provider: {
-              chainId: RINKEBY_CHAIN_ID,
+              chainId: CHAIN_IDS.RINKEBY,
             },
             tokens: [],
             addressBook: {
-              [RINKEBY_CHAIN_ID]: {},
+              [CHAIN_IDS.RINKEBY]: {},
             },
             identities: {},
             accounts: {
@@ -2389,7 +2386,7 @@ describe('Send Slice', () => {
               },
             },
             cachedBalances: {
-              [RINKEBY_CHAIN_ID]: {
+              [CHAIN_IDS.RINKEBY]: {
                 '0xAddress': '0x0',
               },
             },
@@ -2509,11 +2506,11 @@ describe('Send Slice', () => {
             blockGasLimit: '0x3a98',
             selectedAddress: '',
             provider: {
-              chainId: RINKEBY_CHAIN_ID,
+              chainId: CHAIN_IDS.RINKEBY,
             },
             tokens: [],
             addressBook: {
-              [RINKEBY_CHAIN_ID]: {},
+              [CHAIN_IDS.RINKEBY]: {},
             },
             identities: {},
             accounts: {
@@ -2523,7 +2520,7 @@ describe('Send Slice', () => {
               },
             },
             cachedBalances: {
-              [RINKEBY_CHAIN_ID]: {
+              [CHAIN_IDS.RINKEBY]: {
                 '0xAddress': '0x0',
               },
             },
@@ -2682,7 +2679,7 @@ describe('Send Slice', () => {
           blockGasLimit: '0x3a98',
           selectedAddress: '',
           provider: {
-            chainId: RINKEBY_CHAIN_ID,
+            chainId: CHAIN_IDS.RINKEBY,
           },
           tokens: [
             {
@@ -2697,7 +2694,7 @@ describe('Send Slice', () => {
             },
           },
           addressBook: {
-            [RINKEBY_CHAIN_ID]: {},
+            [CHAIN_IDS.RINKEBY]: {},
           },
           identities: {},
           accounts: {
@@ -2707,7 +2704,7 @@ describe('Send Slice', () => {
             },
           },
           cachedBalances: {
-            [RINKEBY_CHAIN_ID]: {
+            [CHAIN_IDS.RINKEBY]: {
               '0xAddress': '0x0',
             },
           },
@@ -2911,7 +2908,7 @@ describe('Send Slice', () => {
           expect(
             getGasInputMode({
               metamask: {
-                provider: { chainId: MAINNET_CHAIN_ID },
+                provider: { chainId: CHAIN_IDS.MAINNET },
                 featureFlags: { advancedInlineGas: false },
               },
               send: initialState,
@@ -2937,7 +2934,7 @@ describe('Send Slice', () => {
           expect(
             getGasInputMode({
               metamask: {
-                provider: { chainId: MAINNET_CHAIN_ID },
+                provider: { chainId: CHAIN_IDS.MAINNET },
                 featureFlags: { advancedInlineGas: true },
               },
               send: initialState,
@@ -2949,7 +2946,7 @@ describe('Send Slice', () => {
           expect(
             getGasInputMode({
               metamask: {
-                provider: { chainId: MAINNET_CHAIN_ID },
+                provider: { chainId: CHAIN_IDS.MAINNET },
                 featureFlags: { advancedInlineGas: false },
                 gasEstimateType: GAS_ESTIMATE_TYPES.ETH_GASPRICE,
               },
@@ -2963,7 +2960,7 @@ describe('Send Slice', () => {
           expect(
             getGasInputMode({
               metamask: {
-                provider: { chainId: MAINNET_CHAIN_ID },
+                provider: { chainId: CHAIN_IDS.MAINNET },
                 featureFlags: { advancedInlineGas: false },
                 gasEstimateType: GAS_ESTIMATE_TYPES.ETH_GASPRICE,
               },
@@ -2977,7 +2974,7 @@ describe('Send Slice', () => {
           expect(
             getGasInputMode({
               metamask: {
-                provider: { chainId: MAINNET_CHAIN_ID },
+                provider: { chainId: CHAIN_IDS.MAINNET },
                 featureFlags: { advancedInlineGas: true },
               },
               send: {
