@@ -62,4 +62,5 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!(multiformats|uuid|nanoid|@metamask/controllers|@metamask/snap-controllers)/)',
   ],
+  workerIdleMemoryLimit: '500MB',
 };
