@@ -10,7 +10,7 @@ const blacklistedHosts = [
   'optimism-mainnet.infura.io',
   'polygon-mainnet.infura.io',
   'api.harmony.one',
-  'palm-mainnet.infura.io'
+  'palm-mainnet.infura.io',
 ];
 
 async function setupMocking(server, testSpecificMock) {
