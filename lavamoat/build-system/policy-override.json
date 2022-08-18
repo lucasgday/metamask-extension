@@ -25,7 +25,8 @@
         "@babel/eslint-parser>semver": true,
         "@babel/parser": true,
         "depcheck>@babel/parser": true,
-        "eslint": true
+        "eslint": true,
+        "lavamoat>lavamoat-tofu>@babel/parser": true
       },
       "globals": {
         "process.versions": true
