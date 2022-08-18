@@ -2102,12 +2102,13 @@
       "packages": {
         "@babel/code-frame": true,
         "@babel/core>@babel/generator": true,
+        "@babel/preset-env>@babel/types": true,
+        "babel/preset-env>b@babel/types": true,
         "depcheck>@babel/traverse>@babel/helper-environment-visitor": true,
         "depcheck>@babel/traverse>@babel/helper-function-name": true,
         "depcheck>@babel/traverse>@babel/helper-hoist-variables": true,
         "depcheck>@babel/traverse>@babel/helper-split-export-declaration": true,
         "depcheck>@babel/traverse>@babel/parser": true,
-        "depcheck>@babel/traverse>@babel/types": true,
         "depcheck>@babel/traverse>globals": true,
         "madge>debug": true
       }
@@ -2126,17 +2127,6 @@
     "depcheck>@babel/traverse>@babel/helper-split-export-declaration": {
       "packages": {
         "@babel/preset-env>@babel/types": true
-      }
-    },
-    "depcheck>@babel/traverse>@babel/types": {
-      "globals": {
-        "console.trace": true,
-        "process.env.BABEL_TYPES_8_BREAKING": true
-      },
-      "packages": {
-        "@babel/core>@babel/types>@babel/helper-string-parser": true,
-        "@babel/core>@babel/types>to-fast-properties": true,
-        "lavamoat>@babel/highlight>@babel/helper-validator-identifier": true
       }
     },
     "depcheck>cosmiconfig>parse-json": {
