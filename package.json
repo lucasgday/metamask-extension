@@ -159,7 +159,7 @@
     "debounce-stream": "^2.0.0",
     "deep-freeze-strict": "1.1.1",
     "end-of-stream": "^1.4.4",
-    "eth-block-tracker": "MetaMask/eth-block-tracker#578b7346b6d7c40e9e707e005c35393378c7f19c",
+    "eth-block-tracker": "MetaMask/eth-block-tracker#c7930cefdf46cac68101ecaec366a72b0146c84e",
     "eth-ens-namehash": "^2.0.8",
     "eth-json-rpc-filters": "^4.2.1",
     "eth-json-rpc-infura": "^5.1.0",

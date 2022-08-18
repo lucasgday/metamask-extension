@@ -3201,7 +3201,7 @@
   resolved "https://registry.yarnpkg.com/@metamask/types/-/types-1.1.0.tgz#9bd14b33427932833c50c9187298804a18c2e025"
   integrity sha512-EEV/GjlYkOSfSPnYXfOosxa3TqYtIW3fhg6jdw+cok/OhMgNn4wCfbENFqjytrHMU2f7ZKtBAvtiP5V8H44sSw==
 
-"@metamask/utils@^2.0.0":
+"@metamask/utils@MetaMask/utils#bc1d894d0b5c6f8cf17a7554cab2ec7eb127eb2b", "@metamask/utils@^2.0.0":
   version "2.1.0"
   resolved "https://codeload.github.com/MetaMask/utils/tar.gz/bc1d894d0b5c6f8cf17a7554cab2ec7eb127eb2b"
   dependencies:
@@ -11350,11 +11350,13 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-eth-block-tracker@MetaMask/eth-block-tracker#578b7346b6d7c40e9e707e005c35393378c7f19c:
+eth-block-tracker@MetaMask/eth-block-tracker#c7930cefdf46cac68101ecaec366a72b0146c84e:
   version "5.0.1"
-  resolved "https://codeload.github.com/MetaMask/eth-block-tracker/tar.gz/578b7346b6d7c40e9e707e005c35393378c7f19c"
+  resolved "https://codeload.github.com/MetaMask/eth-block-tracker/tar.gz/c7930cefdf46cac68101ecaec366a72b0146c84e"
   dependencies:
     "@metamask/safe-event-emitter" "^2.0.0"
+    "@metamask/utils" MetaMask/utils#bc1d894d0b5c6f8cf17a7554cab2ec7eb127eb2b
+    debug "^4.3.4"
     json-rpc-random-id "^1.0.1"
     pify "^3.0.0"
 
