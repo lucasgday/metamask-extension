@@ -2211,13 +2211,13 @@
         "@babel/core>@babel/helpers": true,
         "@babel/core>@babel/parser": true,
         "@babel/core>@babel/template": true,
-        "@babel/core>@babel/traverse": true,
         "@babel/core>@babel/types": true,
         "@babel/core>gensync": true,
         "@babel/core>semver": true,
         "browserify": true,
         "browserify>path-browserify": true,
         "browserify>process": true,
+        "depcheck>@babel/traverse": true,
         "madge>debug": true,
         "nyc>convert-source-map": true
       }
@@ -2259,21 +2259,10 @@
         "console.error": true
       },
       "packages": {
-        "@babel/core>@babel/generator>@babel/types": true,
         "@babel/core>@babel/generator>@jridgewell/gen-mapping": true,
         "@babel/core>@babel/generator>jsesc": true,
+        "@babel/core>@babel/types": true,
         "browserify>buffer": true
-      }
-    },
-    "@babel/core>@babel/generator>@babel/types": {
-      "globals": {
-        "console.trace": true
-      },
-      "packages": {
-        "@babel/core>@babel/types>@babel/helper-string-parser": true,
-        "@babel/core>@babel/types>to-fast-properties": true,
-        "browserify>process": true,
-        "lavamoat>@babel/highlight>@babel/helper-validator-identifier": true
       }
     },
     "@babel/core>@babel/generator>@jridgewell/gen-mapping": {
@@ -2281,9 +2270,9 @@
         "define": true
       },
       "packages": {
+        "@babel/core>@ampproject/remapping>@jridgewell/trace-mapping": true,
         "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/set-array": true,
-        "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/sourcemap-codec": true,
-        "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/trace-mapping": true
+        "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/sourcemap-codec": true
       }
     },
     "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/set-array": {
@@ -2298,15 +2287,6 @@
       },
       "packages": {
         "browserify>buffer": true
-      }
-    },
-    "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/trace-mapping": {
-      "globals": {
-        "define": true
-      },
-      "packages": {
-        "@babel/core>@ampproject/remapping>@jridgewell/trace-mapping>@jridgewell/resolve-uri": true,
-        "@babel/core>@babel/generator>@jridgewell/gen-mapping>@jridgewell/sourcemap-codec": true
       }
     },
     "@babel/core>@babel/generator>jsesc": {
@@ -2339,7 +2319,7 @@
         "@babel/core>@babel/helper-module-transforms>@babel/helper-module-imports": true,
         "@babel/core>@babel/helper-module-transforms>@babel/helper-simple-access": true,
         "@babel/core>@babel/template": true,
-        "@babel/preset-env>@babel/types": true,
+        "@babel/core>@babel/types": true,
         "browserify>assert": true,
         "browserify>path-browserify": true,
         "depcheck>@babel/traverse": true,
@@ -2350,56 +2330,27 @@
     },
     "@babel/core>@babel/helper-module-transforms>@babel/helper-module-imports": {
       "packages": {
-        "@babel/preset-env>@babel/types": true,
+        "@babel/core>@babel/types": true,
         "browserify>assert": true
       }
     },
     "@babel/core>@babel/helper-module-transforms>@babel/helper-simple-access": {
       "packages": {
-        "@babel/preset-env>@babel/types": true
+        "@babel/core>@babel/types": true
       }
     },
     "@babel/core>@babel/helpers": {
       "packages": {
         "@babel/core>@babel/template": true,
-        "@babel/preset-env>@babel/types": true,
+        "@babel/core>@babel/types": true,
         "depcheck>@babel/traverse": true
       }
     },
     "@babel/core>@babel/template": {
       "packages": {
         "@babel/code-frame": true,
-        "@babel/core>@babel/template>@babel/parser": true,
-        "@babel/core>@babel/template>@babel/types": true
-      }
-    },
-    "@babel/core>@babel/template>@babel/types": {
-      "globals": {
-        "console.trace": true
-      },
-      "packages": {
-        "@babel/core>@babel/types>@babel/helper-string-parser": true,
-        "@babel/core>@babel/types>to-fast-properties": true,
-        "browserify>process": true,
-        "lavamoat>@babel/highlight>@babel/helper-validator-identifier": true
-      }
-    },
-    "@babel/core>@babel/traverse": {
-      "globals": {
-        "console.log": true,
-        "console.trace": true
-      },
-      "packages": {
-        "@babel/code-frame": true,
-        "@babel/core>@babel/generator": true,
         "@babel/core>@babel/parser": true,
-        "@babel/core>@babel/types": true,
-        "depcheck>@babel/traverse>@babel/helper-environment-visitor": true,
-        "depcheck>@babel/traverse>@babel/helper-function-name": true,
-        "depcheck>@babel/traverse>@babel/helper-hoist-variables": true,
-        "depcheck>@babel/traverse>@babel/helper-split-export-declaration": true,
-        "depcheck>@babel/traverse>globals": true,
-        "madge>debug": true
+        "@babel/core>@babel/types": true
       }
     },
     "@babel/core>@babel/types": {
@@ -2419,16 +2370,6 @@
       },
       "packages": {
         "browserify>process": true
-      }
-    },
-    "@babel/preset-env>@babel/types": {
-      "globals": {
-        "console.trace": true
-      },
-      "packages": {
-        "@babel/core>@babel/types>to-fast-properties": true,
-        "browserify>process": true,
-        "lavamoat>@babel/highlight>@babel/helper-validator-identifier": true
       }
     },
     "@babel/runtime": {
@@ -3469,7 +3410,7 @@
       },
       "packages": {
         "@babel/core": true,
-        "@babel/preset-env>@babel/types": true,
+        "@babel/core>@babel/types": true,
         "@metamask/rpc-methods>@metamask/snap-utils>ajv": true,
         "@metamask/rpc-methods>@metamask/snap-utils>rfdc": true,
         "browserify": true,
@@ -4796,12 +4737,12 @@
       "packages": {
         "@babel/code-frame": true,
         "@babel/core>@babel/generator": true,
-        "@babel/preset-env>@babel/types": true,
+        "@babel/core>@babel/parser": true,
+        "@babel/core>@babel/types": true,
         "depcheck>@babel/traverse>@babel/helper-environment-visitor": true,
         "depcheck>@babel/traverse>@babel/helper-function-name": true,
         "depcheck>@babel/traverse>@babel/helper-hoist-variables": true,
         "depcheck>@babel/traverse>@babel/helper-split-export-declaration": true,
-        "depcheck>@babel/traverse>@babel/parser": true,
         "depcheck>@babel/traverse>globals": true,
         "madge>debug": true
       }
@@ -4809,17 +4750,17 @@
     "depcheck>@babel/traverse>@babel/helper-function-name": {
       "packages": {
         "@babel/core>@babel/template": true,
-        "@babel/preset-env>@babel/types": true
+        "@babel/core>@babel/types": true
       }
     },
     "depcheck>@babel/traverse>@babel/helper-hoist-variables": {
       "packages": {
-        "@babel/preset-env>@babel/types": true
+        "@babel/core>@babel/types": true
       }
     },
     "depcheck>@babel/traverse>@babel/helper-split-export-declaration": {
       "packages": {
-        "@babel/preset-env>@babel/types": true
+        "@babel/core>@babel/types": true
       }
     },
     "depcheck>@vue/compiler-sfc>postcss>nanoid": {
