@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import Typography from '../typography/typography';
 import Box from '../box/box';
-import Tooltip from '../tooltip/tooltip';
 import {
   COLORS,
   TEXT_ALIGN,
@@ -21,10 +20,9 @@ export default function FormField({
   titleText,
   titleUnit,
   tooltipText,
-  tooltipIcon,
-  tooltipContentText,
   coloredValue,
   titleDetail,
+  titleDetailProps,
   error,
   onChange,
   value,
@@ -39,6 +37,7 @@ export default function FormField({
   passwordStrength,
   passwordStrengthText,
   customSpendingCapText,
+  customTooltipComponent,
   maxButton,
 }) {
   return (
@@ -70,40 +69,21 @@ export default function FormField({
                 {titleUnit}
               </Typography>
             )}
-            {tooltipText && (
-              <InfoTooltip position="top" contentText={tooltipText} />
-            )}
-            {tooltipContentText && (
-              <Box display={DISPLAY.INLINE_BLOCK}>
-                <Tooltip
-                  interactive
-                  position="top"
-                  html={
-                    <Typography
-                      variant={TYPOGRAPHY.H7}
-                      margin={3}
-                      color={COLORS.TEXT_ALTERNATIVE}
-                      className="form-field__heading-title__tooltip"
-                    >
-                      {tooltipContentText}
-                    </Typography>
-                  }
-                >
-                  {tooltipIcon ? (
-                    <i className="fa fa-exclamation-triangle form-field__heading-title__tooltip__warning-icon" />
-                  ) : (
-                    <i className="fa fa-question-circle" />
-                  )}
-                </Tooltip>
-              </Box>
+            {customTooltipComponent || (
+              <>
+                {tooltipText && (
+                  <InfoTooltip position="top" contentText={tooltipText} />
+                )}
+              </>
             )}
           </div>
           {titleDetail && (
             <Box
               className="form-field__heading-detail"
               textAlign={TEXT_ALIGN.END}
-              marginBottom={customSpendingCapText || tooltipContentText ? 2 : 3}
-              marginRight={customSpendingCapText || tooltipContentText ? 0 : 2}
+              marginBottom={3}
+              marginRight={2}
+              {...titleDetailProps}
             >
               {titleDetail}
             </Box>
@@ -138,7 +118,16 @@ export default function FormField({
             placeholder={placeholder}
           />
         )}
-        {maxButton}
+        {maxButton && (
+          <Box
+            className="form-field__max-button"
+            textAlign={TEXT_ALIGN.END}
+            marginRight={4}
+            marginBottom={3}
+          >
+            {maxButton}
+          </Box>
+        )}
         {error && (
           <Typography
             color={COLORS.ERROR_DEFAULT}
@@ -211,6 +200,10 @@ FormField.propTypes = {
    */
   titleDetail: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
+   * Title detail props
+   */
+  titleDetailProps: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
+  /**
    * Show error message
    */
   error: PropTypes.string,
@@ -274,13 +267,12 @@ FormField.propTypes = {
    */
   maxButton: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
-   * Add Tooltip and text content
+   * Add custom tooltip component
    */
-  tooltipContentText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  /**
-   * Check which tooltip icon to use
-   */
-  tooltipIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  customTooltipComponent: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
   /**
    * Show colored value
    */
