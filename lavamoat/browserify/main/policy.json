@@ -4242,9 +4242,11 @@
     },
     "eth-json-rpc-infura": {
       "globals": {
+        "console.log": true,
         "setTimeout": true
       },
       "packages": {
+        "browserify>process": true,
         "eth-json-rpc-infura>eth-json-rpc-middleware": true,
         "eth-json-rpc-infura>eth-rpc-errors": true,
         "eth-json-rpc-infura>json-rpc-engine": true,
@@ -4272,11 +4274,13 @@
         "URL": true,
         "btoa": true,
         "console.error": true,
+        "console.log": true,
         "fetch": true,
         "setTimeout": true
       },
       "packages": {
         "browserify>browser-resolve": true,
+        "browserify>process": true,
         "eth-json-rpc-middleware>eth-sig-util": true,
         "eth-json-rpc-middleware>pify": true,
         "eth-rpc-errors": true,
@@ -4523,7 +4527,11 @@
       }
     },
     "eth-query": {
+      "globals": {
+        "console.log": true
+      },
       "packages": {
+        "browserify>process": true,
         "eth-query>json-rpc-random-id": true,
         "watchify>xtend": true
       }

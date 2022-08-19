@@ -3487,11 +3487,11 @@
         "@metamask/controllers": true,
         "@metamask/providers>@metamask/object-multiplex": true,
         "@metamask/rpc-methods>@metamask/snap-utils": true,
-        "@metamask/rpc-methods>@metamask/utils": true,
         "@metamask/snap-controllers>@metamask/browser-passworder": true,
         "@metamask/snap-controllers>@metamask/execution-environments": true,
         "@metamask/snap-controllers>@metamask/obs-store": true,
         "@metamask/snap-controllers>@metamask/post-message-stream": true,
+        "@metamask/snap-controllers>@metamask/utils": true,
         "@metamask/snap-controllers>@xstate/fsm": true,
         "@metamask/snap-controllers>concat-stream": true,
         "@metamask/snap-controllers>gunzip-maybe": true,
@@ -3568,8 +3568,8 @@
         "removeEventListener": true
       },
       "packages": {
-        "@metamask/rpc-methods>@metamask/utils": true,
-        "@metamask/snap-controllers>@metamask/post-message-stream>readable-stream": true
+        "@metamask/snap-controllers>@metamask/post-message-stream>readable-stream": true,
+        "@metamask/snap-controllers>@metamask/utils": true
       }
     },
     "@metamask/snap-controllers>@metamask/post-message-stream>readable-stream": {
@@ -3590,6 +3590,11 @@
     "@metamask/snap-controllers>@metamask/post-message-stream>readable-stream>string_decoder": {
       "packages": {
         "@metamask/snap-controllers>json-rpc-middleware-stream>readable-stream>safe-buffer": true
+      }
+    },
+    "@metamask/snap-controllers>@metamask/utils": {
+      "packages": {
+        "eslint>fast-deep-equal": true
       }
     },
     "@metamask/snap-controllers>concat-stream": {
@@ -4862,9 +4867,11 @@
     },
     "eth-json-rpc-infura": {
       "globals": {
+        "console.log": true,
         "setTimeout": true
       },
       "packages": {
+        "browserify>process": true,
         "eth-json-rpc-infura>eth-json-rpc-middleware": true,
         "eth-json-rpc-infura>eth-rpc-errors": true,
         "eth-json-rpc-infura>json-rpc-engine": true,
@@ -4892,11 +4899,13 @@
         "URL": true,
         "btoa": true,
         "console.error": true,
+        "console.log": true,
         "fetch": true,
         "setTimeout": true
       },
       "packages": {
         "browserify>browser-resolve": true,
+        "browserify>process": true,
         "eth-json-rpc-middleware>eth-sig-util": true,
         "eth-json-rpc-middleware>pify": true,
         "eth-rpc-errors": true,
@@ -5143,7 +5152,11 @@
       }
     },
     "eth-query": {
+      "globals": {
+        "console.log": true
+      },
       "packages": {
+        "browserify>process": true,
         "eth-query>json-rpc-random-id": true,
         "watchify>xtend": true
       }
